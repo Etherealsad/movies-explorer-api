@@ -10,7 +10,7 @@ const cors = require('./middlewares/cors');
 const errorHandler = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/limiter');
-const router = require('./routes/index');
+const router = require('./routes');
 
 const { MONGO_ADRESS, PORT } = require('./utils/config');
 

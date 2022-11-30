@@ -10,6 +10,7 @@ const UnauthorizedError = require('../errors/unauthorized-err');
 const {
   badRequestErrorMsg, usersWrongEmailOrPasswordMsg, usersNotFoundErrorMsg, usersConflictErrorMsg,
 } = require('../utils/errorMessages');
+const { NODE_ENV, JWT_PROD_KEY } = require('../utils/config');
 
 const { JWT_SECRET } = process.env;
 
@@ -86,7 +87,7 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             next(new UnauthorizedError(usersWrongEmailOrPasswordMsg));
           } else {
-            const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+            const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : JWT_PROD_KEY, { expiresIn: '7d' });
             res.status(201).send({ token });
           }
         });

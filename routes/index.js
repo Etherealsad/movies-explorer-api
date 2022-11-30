@@ -12,6 +12,8 @@ router.use('/', authRoutes);
 router.use('/users', auth, usersRoutes);
 router.use('/movies', auth, moviesRoutes);
 
-router.use('*', (req, res, next) => next(new NotFoundError(notFoundErrorMsg)));
+router.all('/*', auth, () => {
+  throw new NotFoundError(notFoundErrorMsg);
+});
 
 module.exports = router;
