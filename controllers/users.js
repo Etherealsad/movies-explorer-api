@@ -80,7 +80,7 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password')
-    .orFail(new BadRequestError(badRequestErrorMsg))
+    .orFail(new UnauthorizedError(usersWrongEmailOrPasswordMsg))
     .then((user) => {
       bcrypt.compare(password, user.password)
         .then((matched) => {

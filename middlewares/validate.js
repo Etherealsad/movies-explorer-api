@@ -36,7 +36,7 @@ module.exports.validateDeleteMovieByID = celebrate({
 module.exports.validateCreateUser = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
-    password: Joi.string().required().max(35),
+    password: Joi.string().required(),
     name: Joi.string().required().min(2).max(30),
   }),
 });

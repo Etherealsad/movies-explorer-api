@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { isURL } = require('validator');
-const { regExpYear } = require('../utils/regexp');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -17,14 +16,7 @@ const movieSchema = new mongoose.Schema({
   },
   year: {
     type: String,
-    minLength: 4,
-    maxLength: 4,
     required: true,
-    validate: {
-      validator(v) {
-        return regExpYear.test(v);
-      },
-    },
   },
   description: {
     type: String,
